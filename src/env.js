@@ -8,6 +8,8 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    AIRPORT_API_PASSWORD: z.string(),
+    AIRPORT_API_USERNAME: z.string(),
   },
 
   /**
@@ -25,6 +27,8 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    AIRPORT_API_PASSWORD: process.env.AIRPORT_API_PASSWORD,
+    AIRPORT_API_USERNAME: process.env.AIRPORT_API_USERNAME,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
