@@ -21,8 +21,14 @@ import { getWeatherData } from '@/server/weather'
 
 const airports: Airport[] = []
 
-for (const key in airportsJSON) {
-  airports.push(airportsJSON[key])
+const airportsJSONTyped: { [key: string]: Airport } = airportsJSON as {
+  [key: string]: Airport
+}
+
+for (const key in airportsJSONTyped) {
+  if (airportsJSONTyped[key]) {
+    airports.push(airportsJSONTyped[key])
+  }
 }
 
 export default function AirportSearch() {
@@ -66,7 +72,7 @@ export default function AirportSearch() {
 
   const handleSelect = (icao: string) => {
     if (isBlank(icao)) return
-    
+
     fetchData(icao)
     setSearchQuery('')
     setOpen(false)
