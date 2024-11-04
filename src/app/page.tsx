@@ -7,7 +7,7 @@ export default function HomePage() {
     <div className='h-screen w-screen'>
       <AirportInfoPanel />
       <MapToolbar />
-      {/* <Map /> */}
+      <Map />
     </div>
   )
 }
