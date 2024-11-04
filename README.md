@@ -8,7 +8,10 @@
 - Leaflet
 
 # Q & A
-How much time was spent developing it: 11 hours
+1. How much time was spent developing it: 11 hours
+2. How to use any features of the app that are not obvious.
+3. Ideas for improving your implementation to make the implementation “production ready”,
+if any.
 
 
 
@@ -22,12 +25,12 @@ How much time was spent developing it: 11 hours
 # TODO
 - [X] Project Setup
 - [X] Airport code search
-- [ ] BUG: Airport search click not working -> https://github.com/shadcn-ui/ui/issues/5560
 - [X] Add a map
 - [X] API Integration
 - [X] Display data on left vertical panel
 - [X] Finish data display (cloud string, forecast)
 - [X] Deploy
+- [ ] BUG: Airport search click not working -> https://github.com/shadcn-ui/ui/issues/5560
 - [ ] Get pilot feedback
 
 # Create T3 App
