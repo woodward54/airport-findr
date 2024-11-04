@@ -7,12 +7,17 @@ import {
   CommandList,
   CommandItem,
 } from '@/components/ui/command'
-import { Plane } from 'lucide-react'
+import { Loader2, Plane, Search } from 'lucide-react'
 import { isBlank } from '@/lib/utils'
 import { type Airport } from '@/types/airport'
 
 // Airport data from https://github.com/mwgg/Airports
 import airportsJSON from 'public/airports.json'
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
+import { useAppStore } from '@/lib/store/use-app-store'
+import { toast } from 'sonner'
+import { getAirportData } from '@/server/airport'
+import { getWeatherData } from '@/server/weather'
 
 const airports: Airport[] = []
 
@@ -20,13 +25,12 @@ for (const key in airportsJSON) {
   airports.push(airportsJSON[key])
 }
 
-interface SearchProps {
-  onAirportSelect: (airport: Airport) => void
-}
+export default function AirportSearch() {
+  const { setAirportData, setWeatherData } = useAppStore()
 
-export default function AirportSearch({ onAirportSelect }: SearchProps) {
   const [open, setOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     setOpen(isBlank(searchQuery) ? false : true)
@@ -60,10 +64,30 @@ export default function AirportSearch({ onAirportSelect }: SearchProps) {
     })
     .slice(0, 5)
 
-  const handleSelect = (airport: Airport) => {
-    onAirportSelect(airport)
+  const handleSelect = (icao: string) => {
+    if (isBlank(icao)) return
+    
+    fetchData(icao)
     setSearchQuery('')
     setOpen(false)
+  }
+
+  const fetchData = async (icaoCode: string) => {
+    setIsLoading(true)
+
+    try {
+      const [airportData, weatherData] = await Promise.all([
+        getAirportData(icaoCode),
+        getWeatherData(icaoCode),
+      ])
+
+      setAirportData(airportData)
+      setWeatherData(weatherData)
+    } catch (error) {
+      toast.error(`Failed to find airport with code: ${icaoCode}`)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -76,22 +100,45 @@ export default function AirportSearch({ onAirportSelect }: SearchProps) {
         }
       }}
     >
-      <CommandInput
-        placeholder='Search airports...'
-        value={searchQuery}
-        onValueChange={setSearchQuery}
-        onBlur={() => setOpen(false)}
-        onFocus={() => setOpen(true)}
-      />
+      <div className='flex items-center justify-between px-2'>
+        <div className='flex-1'>
+          <CommandInput
+            className=''
+            placeholder='Search airports...'
+            value={searchQuery}
+            onValueChange={setSearchQuery}
+            onBlur={() => setOpen(false)}
+            onFocus={() => setOpen(true)}
+          />
+        </div>
+        {isLoading ? (
+          <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+        ) : (
+          <MagnifyingGlassIcon
+            className='mr-2 h-4 w-4 cursor-pointer'
+            onClick={() => handleSelect(searchQuery)}
+          />
+        )}
+      </div>
 
-      {open ? (
+      {open && searchQuery.length > 0 ? (
         <CommandList>
+          <CommandItem
+            className='rounded-none'
+            onSelect={() => {
+              handleSelect(searchQuery)
+            }}
+          >
+            <Search className='mr-2 h-4 w-4' />
+            Search for {searchQuery}
+          </CommandItem>
+
           {filteredAirports.map((airport) => (
             <CommandItem
               className='rounded-none'
               key={airport.icao}
               onSelect={() => {
-                handleSelect(airport)
+                handleSelect(airport.icao)
               }}
             >
               <Plane className='mr-2 h-4 w-4' />

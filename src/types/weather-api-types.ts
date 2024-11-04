@@ -3,7 +3,7 @@ export interface WeatherApiResponse {
 }
 
 export interface Report {
-  conditions: Conditions
+  conditions?: Conditions
   forecast: Forecast
   windsAloft: WindsAloft
   mos: Mos
@@ -16,7 +16,7 @@ export interface Conditions {
   lat: number
   lon: number
   elevationFt: number
-  tempC: number
+  tempC?: number
   dewpointC: number
   pressureHg: number
   pressureHpa: number
@@ -27,7 +27,7 @@ export interface Conditions {
   cloudLayers: CloudLayer[]
   cloudLayersV2: CloudLayersV2[]
   weather: any[]
-  visibility: Visibility
+  visibility?: Visibility
   wind: Wind
   remarks: Remarks
 }
@@ -47,14 +47,6 @@ export interface CloudLayersV2 {
 export interface Visibility {
   distanceSm: number
   prevailingVisSm: number
-}
-
-export interface Wind {
-  speedKts: number
-  gustSpeedKts: number
-  direction: number
-  from: number
-  variable: boolean
 }
 
 export interface Remarks {
@@ -103,7 +95,7 @@ export interface Condition {
   cloudLayersV2: CloudLayersV22[]
   weather: string[]
   visibility: Visibility3
-  wind: Wind2
+  wind: Wind
   period: Period2
 }
 
@@ -126,11 +118,11 @@ export interface Visibility3 {
   prevailingVisDistanceQualifier: number
 }
 
-export interface Wind2 {
+export interface Wind {
   speedKts: number
   gustSpeedKts?: number
-  direction: number
-  from: number
+  direction?: number
+  from?: number
   variable: boolean
 }
 
@@ -430,7 +422,7 @@ export interface Condition2 {
   cloudLayersV2: CloudLayersV23[]
   weather: any[]
   visibility: Visibility4
-  wind: Wind3
+  wind: Wind
   period: Period6
   turbulence: any[]
   icing: any[]
@@ -453,14 +445,6 @@ export interface CloudLayersV23 {
 export interface Visibility4 {
   distanceSm: number
   distanceQualifier: number
-}
-
-export interface Wind3 {
-  speedKts: number
-  gustSpeedKts: number
-  direction: number
-  from: number
-  variable: boolean
 }
 
 export interface Period6 {

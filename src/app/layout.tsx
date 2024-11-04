@@ -5,7 +5,7 @@ import { type Metadata } from 'next'
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
-  title: 'Airport Finder',
+  title: 'Airport Findr',
   description: 'Lookup airport data',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
 }
