@@ -44,7 +44,7 @@
 - [x] API Integration
 - [x] Display data on left vertical panel
 - [x] Finish data display (cloud string, forecast)
-- [x] Deploy
+- [] Deploy -> leaflet is not working with next15, don't have enough time to swap out mapping library
 - [ ] BUG: Airport search click not working -> https://github.com/shadcn-ui/ui/issues/5560
 
 # Create T3 App
