@@ -21,7 +21,7 @@ import {
   ktsToMph,
   roundToDecimals,
 } from '@/lib/utils'
-import { CloudLayer, Conditions, Forecast } from '@/types/weather-api-types'
+import { CloudLayer, Forecast } from '@/types/weather-api-types'
 
 interface AirportData {
   identifier: string

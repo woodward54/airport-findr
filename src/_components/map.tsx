@@ -1,30 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-  useMap,
-} from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useAppStore } from '@/lib/store/use-app-store'
 
-import L from 'leaflet'
-import markerIconPng from 'leaflet/dist/images/marker-icon.png'
-import markerShadowPng from 'leaflet/dist/images/marker-shadow.png'
-
-// Fix marker icons
-const markerIcon = new L.Icon({
-  iconUrl: markerIconPng,
-  shadowUrl: markerShadowPng,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-})
+import 'leaflet/dist/leaflet.css'
+import 'leaflet-defaulticon-compatibility'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 
 function LocationMarker() {
   const { airportData } = useAppStore()
@@ -40,13 +22,13 @@ function LocationMarker() {
   }, [airportData])
 
   return position === null ? null : (
-    <Marker position={position} icon={markerIcon}>
+    <Marker position={position}>
       <Popup>{airportData?.name}</Popup>
     </Marker>
   )
 }
 
-export default function Map() {
+function MapComponent() {
   return (
     <MapContainer
       center={[30.263686207316947, -97.74199162169602]}
@@ -61,4 +43,8 @@ export default function Map() {
       <LocationMarker />
     </MapContainer>
   )
+}
+
+export default function Map() {
+  return <MapComponent />
 }
