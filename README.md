@@ -1,7 +1,5 @@
 # Airport Findr
 
-![Deployed App](https://airport-findr.vercel.app)
-
 # Stack
 
 - Next.js 15 (App Router)
@@ -25,6 +23,7 @@
 3.  Ideas for improving your implementation to make the implementation “production ready”,
     if any.
 
+        - Deploy the app to vercel
         - I would have liked to expand the map functionality to add features like highlighting the runways, taxiways, live weather data, etc.
         - I would have liked better type safety on the weather & airport API data. Because I was not given a schema, I had to make assumptions about which properties were optional, and their respective types. See `src/types/airport.ts` & `src/types/weather.ts` for more details.
 

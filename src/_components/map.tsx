@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
-import { useAppStore } from '@/lib/store/use-app-store'
-
 import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+import 'leaflet-defaulticon-compatibility'
+
+import { useEffect, useState } from 'react'
+import { useAppStore } from '@/lib/store/use-app-store'
+import { Marker, Popup, useMap, MapContainer, TileLayer } from 'react-leaflet'
 
 function LocationMarker() {
   const { airportData } = useAppStore()
@@ -28,7 +28,7 @@ function LocationMarker() {
   )
 }
 
-function MapComponent() {
+export default function MapClient() {
   return (
     <MapContainer
       center={[30.263686207316947, -97.74199162169602]}
@@ -43,8 +43,4 @@ function MapComponent() {
       <LocationMarker />
     </MapContainer>
   )
-}
-
-export default function Map() {
-  return <MapComponent />
 }

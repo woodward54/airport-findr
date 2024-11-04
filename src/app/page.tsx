@@ -1,3 +1,5 @@
+'use client'
+
 import AirportInfoPanel from '@/_components/airport-info-panel'
 import MapToolbar from '@/_components/toolbar'
 import Map from '@/_components/map'
